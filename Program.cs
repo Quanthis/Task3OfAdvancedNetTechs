@@ -14,16 +14,18 @@ namespace Task3OfAdvancedNetTechs
             var post = new Posts("123");
             var profile = new Profiles("341");
             var otherPost = new Posts("1234");
+            var oneMorePost = new Posts("123123");
 
-            Posts[] linkedPosts = new Posts[1];
+            Posts[] linkedPosts = new Posts[2];
             linkedPosts[0] = otherPost;
+            linkedPosts[1] = oneMorePost;
 
 
             var sample = new Send(post, profile, "mail@dot.com", "Name", "http://somelink", "footer", "content", linkedPosts);
 
             var json = new BuildJSON(sample);
             json.SerializeToJson();
-            Console.WriteLine(json);
+            //Console.WriteLine(json);
             
             //await sample.SerializeToJson();
             /*var json = new JavaScriptSerializer();

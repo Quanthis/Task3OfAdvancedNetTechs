@@ -9,14 +9,14 @@ namespace Task3OfAdvancedNetTechs
 {
     public class BuildJSON
     {
-        public Posts postID;
-        public Profiles profileID;
+        public string postID;
+        public string profileID;
         public string mail;
         public string name;
         public string avatar;
         public string footer;
         public string content;
-        public Posts[] answers;
+        public List<string> answers;
 
         public BuildJSON(Send valueToConvert)
         {

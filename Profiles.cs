@@ -10,8 +10,10 @@ namespace Task3OfAdvancedNetTechs
     public class Profiles
     {
         private static int globalIndex = 0;
+        private int index = 0;
 
-        public static List<string> profileIDs = new List<string>();
+        private static List<string> profileIDs = new List<string>();
+        public List<string> ToSend;
 
 
         public Profiles(string postID)
@@ -20,11 +22,13 @@ namespace Task3OfAdvancedNetTechs
             {
                 profileIDs.Add(postID);
                 Interlocked.Increment(ref globalIndex);
+                index = globalIndex;
             }
             else if (CheckForDuplicates(postID).Result)
             {
                 profileIDs.Add(postID);
                 Interlocked.Increment(ref globalIndex);
+                index = globalIndex;
             }
         }
 
@@ -42,6 +46,19 @@ namespace Task3OfAdvancedNetTechs
                 }
                 return true;
             });
+        }
+
+        public string GetElement()
+        {
+            if (profileIDs.Count == 0)
+            {
+                throw new InvalidOperationException("List has no elements, therefore it can not be copied.");
+            }
+            else
+            {
+                ToSend = profileIDs;
+                return ToSend[index - 1];
+            }
         }
     }
 }

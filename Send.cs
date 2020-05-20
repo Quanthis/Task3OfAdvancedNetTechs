@@ -31,13 +31,13 @@ namespace Task3OfAdvancedNetTechs
         }
 
         #region Getters
-        public Posts GetPost()
+        public string GetPost()
         {
-            return postID;
+            return postID.GetElement();
         }
-        public Profiles GetProfile()
+        public string GetProfile()
         {
-            return profileID;
+            return profileID.GetElement();
         }
 
         public string GetMail()
@@ -65,9 +65,18 @@ namespace Task3OfAdvancedNetTechs
             return content;
         }
 
-        public Posts[] GetAnswers()
+        public List<string> GetAnswers()
         {
-            return answers;
+            Console.WriteLine(answers.Length);
+            List<string> result = new List<string>();
+
+            for(int i = 0; i < answers.Length; ++i)
+            {
+                Console.WriteLine(i);
+                result.Add(answers[i].GetElement());
+            }
+
+            return result;
         }
         #endregion
 

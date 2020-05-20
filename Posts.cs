@@ -9,10 +9,12 @@ namespace Task3OfAdvancedNetTechs
 {
     public class Posts
     {
-        private static int globalIndex = 0;
+        private static int globalIndex = 1;
+        private int index = 1;
 
-        public static List<string> postsID = new List<string>();
+        private List<string> postsID = new List<string>();
 
+        public List <string> ToSend;
 
         public Posts(string postID)
         {
@@ -20,11 +22,13 @@ namespace Task3OfAdvancedNetTechs
             {
                 postsID.Add(postID);
                 Interlocked.Increment(ref globalIndex);
+                index = globalIndex;
             }
             else if (CheckForDuplicates(postID).Result)
             {
                 postsID.Add(postID);
                 Interlocked.Increment(ref globalIndex);
+                index = globalIndex;
             }
         }
 
@@ -44,9 +48,17 @@ namespace Task3OfAdvancedNetTechs
             });
         }
 
-        public string GetElement(int index)
+        public string GetElement()
         {
-            return postsID[index];
+            if (postsID.Count == 0)
+            {
+                throw new InvalidOperationException("List has no elements, therefore it can not be copied.");
+            }
+            else
+            {
+                ToSend = postsID;
+                return ToSend[index - 1];
+            }
         }
     }
 }
