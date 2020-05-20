@@ -11,14 +11,19 @@ namespace Task3OfAdvancedNetTechs
     {
         private static int globalIndex = 0;
 
-        private readonly string[] postsID;
+        public static List<string> postsID = new List<string>();
 
 
         public Posts(string postID)
         {
-            if (CheckForDuplicates(postID).Result)
+            if(postsID.Count == 0)
             {
-                postsID[globalIndex] = postID;
+                postsID.Add(postID);
+                Interlocked.Increment(ref globalIndex);
+            }
+            else if (CheckForDuplicates(postID).Result)
+            {
+                postsID.Add(postID);
                 Interlocked.Increment(ref globalIndex);
             }
         }
@@ -27,7 +32,7 @@ namespace Task3OfAdvancedNetTechs
         {
             return await Task.Run(() =>
             {
-                for (int i = 0; i < postsID.Length; ++i)
+                for (int i = 0; i < postsID.Count; ++i)
                 {
                     if (postID == postsID[i])
                     {
@@ -37,6 +42,11 @@ namespace Task3OfAdvancedNetTechs
                 }
                 return true;
             });
+        }
+
+        public string GetElement(int index)
+        {
+            return postsID[index];
         }
     }
 }

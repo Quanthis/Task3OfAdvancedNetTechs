@@ -11,14 +11,19 @@ namespace Task3OfAdvancedNetTechs
     {
         private static int globalIndex = 0;
 
-        private readonly string[] profileIDs;
+        public static List<string> profileIDs = new List<string>();
 
 
         public Profiles(string postID)
         {
-            if (CheckForDuplicates(postID).Result)
+            if(profileIDs.Count == 0)
             {
-                profileIDs[globalIndex] = postID;
+                profileIDs.Add(postID);
+                Interlocked.Increment(ref globalIndex);
+            }
+            else if (CheckForDuplicates(postID).Result)
+            {
+                profileIDs.Add(postID);
                 Interlocked.Increment(ref globalIndex);
             }
         }
@@ -27,11 +32,11 @@ namespace Task3OfAdvancedNetTechs
         {
             return await Task.Run(() =>
             {
-                for (int i = 0; i < profileIDs.Length; ++i)
+                for (int i = 0; i < profileIDs.Count; ++i)
                 {
                     if (postID == profileIDs[i])
                     {
-                        throw new InvalidOperationException("This string is already bound to other post!");
+                        throw new InvalidOperationException("This string is already bound to other profile!");
                         return false;
                     }
                 }
