@@ -65,7 +65,7 @@ namespace Task3OfAdvancedNetTechs
             return content;
         }
 
-        public List<string> GetAnswers()
+        /*public List<string> GetAnswers()
         {
             Console.WriteLine(answers.Length);
             List<string> result = new List<string>();
@@ -77,7 +77,7 @@ namespace Task3OfAdvancedNetTechs
             }
 
             return result;
-        }
+        }*/
         #endregion
 
         public async Task SerializeToJson()

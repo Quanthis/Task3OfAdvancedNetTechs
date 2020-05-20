@@ -9,8 +9,8 @@ namespace Task3OfAdvancedNetTechs
 {
     public class Posts
     {
-        private static int globalIndex = 1;
-        private int index = 1;
+        private static int globalIndex = 0;
+        private int index = 0;
 
         private List<string> postsID = new List<string>();
 
