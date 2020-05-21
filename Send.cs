@@ -9,31 +9,48 @@ namespace Task3OfAdvancedNetTechs
 {
     public class Send
     {
-        private Posts postID;
+        private HashSet<string> postID =  new HashSet<string>();
         private Profiles profileID;
         private string mail;
         private string name;
         private string avatar;
         private string footer;
         private string content;
-        private Posts[] answers;
+        private HashSet<string> answers = new HashSet<string>();
 
-        public Send(Posts postID, Profiles profileID, string mail, string name, string avatar, string footer, string content, Posts[] answers)
+        public Send(string postID, Profiles profileID, string mail, string name, string avatar, string footer, string content, string[] answers)
         {
-            this.postID = postID;
-            this.profileID = profileID;
-            this.mail = mail;
-            this.name = name;
-            this.avatar = avatar;
-            this.footer = footer;
-            this.content = content;
-            this.answers = answers;
+            try
+            {
+                this.postID.Add(postID);
+                this.profileID = profileID;
+                this.mail = mail;
+                this.name = name;
+                this.avatar = avatar;
+                this.footer = footer;
+                this.content = content;
+
+                for(int i = 0; i < answers.Length; ++i)
+                {
+                    this.answers.Add(answers[i]);
+                }
+            }
+            catch(Exception)
+            {
+                Console.WriteLine("One of unique string is not unique");
+            }
+        }
+
+        public void AddAnswer(string answer)
+        {
+            answers.Add(answer);
         }
 
         #region Getters
         public string GetPost()
         {
-            return postID.GetElement();
+            List<string> sent = postID.ToList<string>();
+            return sent[0];
         }
         public string GetProfile()
         {
@@ -65,30 +82,12 @@ namespace Task3OfAdvancedNetTechs
             return content;
         }
 
-        /*public List<string> GetAnswers()
+        public List<string> GetAnswers()
         {
-            Console.WriteLine(answers.Length);
-            List<string> result = new List<string>();
-
-            for(int i = 0; i < answers.Length; ++i)
-            {
-                Console.WriteLine(i);
-                result.Add(answers[i].GetElement());
-            }
-
+            //Console.WriteLine(answers.Length);
+            List<string> result = answers.ToList<string>();
             return result;
-        }*/
-        #endregion
-
-        public async Task SerializeToJson()
-        {
-            await Task.Run(() =>
-            {
-                string cont = this.content;
-                var json = new JavaScriptSerializer().Serialize(cont);
-                Console.WriteLine("Serialized object: " + json);
-                //return json;
-            });
         }
+        #endregion
     }
 }

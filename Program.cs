@@ -11,28 +11,14 @@ namespace Task3OfAdvancedNetTechs
     {
         static async Task Main(string[] args)
         {
-            var post = new Posts("123");
-            var profile = new Profiles("341");
-            var otherPost = new Posts("1234");
-            var oneMorePost = new Posts("123123");
+            var profile = new Profiles("341"); 
 
-            Posts[] linkedPosts = new Posts[2];
-            linkedPosts[0] = otherPost;
-            linkedPosts[1] = oneMorePost;
+            string[] anwers = { "answer1", "answer2" };
 
-
-            var sample = new Send(post, profile, "mail@dot.com", "Name", "http://somelink", "footer", "content", linkedPosts);
+            var sample = new Send("postID", profile, "mail@dot.com", "Name", "http://somelink", "footer", "content", anwers);
 
             var json = new BuildJSON(sample);
-            json.SerializeToJson();
-            //Console.WriteLine(json);
-            
-            //await sample.SerializeToJson();
-            /*var json = new JavaScriptSerializer();
-            var serialized = json.Serialize(sample);
-            Console.WriteLine(serialized);*/
-
-            //Console.WriteLine(post.GetElement(10));
+            await json.SerializeToJson();
 
             Console.ReadKey();
         }

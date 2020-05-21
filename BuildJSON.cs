@@ -30,14 +30,14 @@ namespace Task3OfAdvancedNetTechs
             this.answers = valueToConvert.GetAnswers();
         }
 
-        public async Task SerializeToJson()
+        public async Task<string> SerializeToJson()
         {
-            await Task.Run(() =>
+            return await Task.Run(() =>
             {
                 string cont = this.content;
                 var json = new JavaScriptSerializer().Serialize(this);
                 Console.WriteLine("Serialized object: " + json);
-                //return json;
+                return json;
             });
         }
     }
