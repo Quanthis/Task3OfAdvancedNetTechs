@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Web.Script.Serialization;
 
 namespace Task3OfAdvancedNetTechs
 {
@@ -84,7 +82,6 @@ namespace Task3OfAdvancedNetTechs
 
         public List<string> GetAnswers()
         {
-            //Console.WriteLine(answers.Length);
             List<string> result = answers.ToList<string>();
             return result;
         }
